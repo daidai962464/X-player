@@ -27,14 +27,39 @@
  */
 
 import './index.css';
-// const { ipcRenderer } = require('electron');
 
 console.log('👋 This message is being logged by "renderer.js", included via webpack');
 
-    const myButton = document.getElementById('myButton');
-    //按钮点击事件处理程序
-    myButton.addEventListener('click', () => {
-        // 在控制台中输出消息
-        // ipcRenderer.send('dp-video-window');
-    });
 
+// let closeFlag = false;
+// const myButton01 = document.getElementById('myButton01');
+// myButton01.addEventListener('click', () => {
+//     const childWindow = window.open('', 'modal')
+//     if (closeFlag) {
+//         closeFlag = false;
+//         childWindow.close();
+//     } else {
+//         childWindow.document.write('<h1>Hello111</h1>')
+//         closeFlag = true;
+//     }
+// });
+//
+// const myButton02 = document.getElementById('myButton02');
+// myButton02.addEventListener('click', () => {
+//     const childWindow = window.open('', 'modal')
+//     if (closeFlag) {
+//         closeFlag = false;
+//         childWindow.close();
+//     } else {
+//         childWindow.document.write('<h1>Hello22</h1>')
+//         closeFlag = true;
+//     }
+// });
+
+
+const electron = require('electron');
+
+const myButton01 = document.getElementById('myButton01');
+myButton01.addEventListener('click', () => {
+
+});
