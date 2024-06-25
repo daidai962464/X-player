@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Page</title>
+</head>
+<body>
+<h1>New Page1</h1>
+<div id="data-container"></div>
+<script>
+    window.electronApi.onInitData((data) => {
+        document.getElementById('data-container').innerText = `Message: ${data.title}`;
+    });
+</script>
+</body>
+</html>

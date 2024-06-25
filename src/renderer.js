@@ -30,36 +30,28 @@ import './index.css';
 
 console.log('👋 This message is being logged by "renderer.js", included via webpack');
 
-
-// let closeFlag = false;
-// const myButton01 = document.getElementById('myButton01');
-// myButton01.addEventListener('click', () => {
-//     const childWindow = window.open('', 'modal')
-//     if (closeFlag) {
-//         closeFlag = false;
-//         childWindow.close();
-//     } else {
-//         childWindow.document.write('<h1>Hello111</h1>')
-//         closeFlag = true;
-//     }
-// });
-//
-// const myButton02 = document.getElementById('myButton02');
-// myButton02.addEventListener('click', () => {
-//     const childWindow = window.open('', 'modal')
-//     if (closeFlag) {
-//         closeFlag = false;
-//         childWindow.close();
-//     } else {
-//         childWindow.document.write('<h1>Hello22</h1>')
-//         closeFlag = true;
-//     }
-// });
-
-
-const electron = require('electron');
+const WindowParams = require('./windowParams');
 
 const myButton01 = document.getElementById('myButton01');
 myButton01.addEventListener('click', () => {
+    let windowParams = new WindowParams(800, 600, 'src/newpage1.html', {
+        contextIsolation: true,
+        enableRemoteModule: false,
+        nodeIntegration: false
+    }, {
+        title: 'it is page1'
+    });
+    window.electronApi.createNewWindow(windowParams);
+});
 
+const myButton02 = document.getElementById('myButton02');
+myButton02.addEventListener('click', () => {
+    let windowParams = new WindowParams(800, 600, 'src/newpage2.html', {
+        contextIsolation: true,
+        enableRemoteModule: false,
+        nodeIntegration: false
+    }, {
+        title: 'it is page2'
+    });
+    window.electronApi.createNewWindow(windowParams);
 });
