@@ -8,10 +8,25 @@
 <body>
 <h1>New Page1</h1>
 <div id="data-container"></div>
+<main>
+    <pre id="config-output"></pre>
+</main>
 <script>
+    let config111;
     window.electronApi.onInitData((data) => {
         document.getElementById('data-container').innerText = `Message: ${data.title}`;
     });
+
+    document.addEventListener('DOMContentLoaded', () => {
+        console.log('load*******************************');
+        window.electronApi.receiveConfig((config) => {
+            config111 = config;
+            console.log('Received config:', config);
+            // Now you can use the config in your page
+            document.getElementById('config-output').innerText = JSON.stringify(config);
+        });
+    });
+    console.log('Received config111:', config111);
 </script>
 </body>
 </html>

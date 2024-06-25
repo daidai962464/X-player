@@ -8,5 +8,5 @@ console.log('👋 This message is being logged by "preload.js", included via web
 contextBridge.exposeInMainWorld('electronApi', {
     createNewWindow: (windowParams) => ipcRenderer.send('create-or-reload-window', windowParams),
     onInitData: (callback) => ipcRenderer.on('init-data', (event, data) => callback(data)),
-    getEnv: (key) => process.env[key]
+    receiveConfig: (callback) => ipcRenderer.on('config', (event, config) => callback(config))
 });

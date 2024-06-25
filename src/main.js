@@ -6,13 +6,11 @@ let mainWindow;
 let newWindow;
 
 console.log('NODE_ENV:', process.env.NODE_ENV);
-
 function getConfig() {
     const env = process.env.NODE_ENV || 'development';
     const configPath = path.join(appPath, `config/config.${env}.json`);
     return JSON.parse(fs.readFileSync(configPath, 'utf-8'));
 }
-
 const config = getConfig();
 console.log(config)
 
@@ -43,6 +41,9 @@ const createMainWindow = () => {
     }
     mainWindow.loadURL(MAIN_WINDOW_WEBPACK_ENTRY).then(r => {
         console.log('Loading ' + MAIN_WINDOW_WEBPACK_ENTRY + ' success');
+    });
+    mainWindow.webContents.on('did-finish-load', () => {
+        mainWindow.webContents.send('config', config);
     });
     ipcMain.on('create-or-reload-window', (event, windowParams) => {
         if (!newWindow) {
@@ -102,15 +103,10 @@ function createWindow(windowParams) {
     // });
     window.setMenu(null);
     if(config.openDevToolsFlag){
-        mainWindow.webContents.openDevTools();
+        window.webContents.openDevTools();
     }
     window.loadFile(path.join(appPath, windowParams.loadFile)).then(r => {
         console.log('Loading ' + path.join(appPath, windowParams.loadFile) + ' success');
     });
-    // window.webContents.on('console-message', (event, level, message, line, sourceId) => {
-    //     if (message.includes("Autofill.enable")) {
-    //         event.preventDefault(); // 屏蔽错误消息
-    //     }
-    // });
     return window;
 }
